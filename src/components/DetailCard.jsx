@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import sunny from "../../public/sunny.svg";
+import { weatherIcons } from "../weatherIcons";
 
 const CardContainer = styled.div`
   display: flex;
@@ -24,13 +24,17 @@ const CardText = styled.p`
   font-size: 2.2rem;
 `;
 
-// replace src for img with (weatherData[0].WeatherIcon) this is the number you need to download the numbered icons
-
 export default function DetailCard({ weatherData }) {
   return (
     <CardContainer>
       <CurrentDayCard>
-        <img src={sunny} alt="sun icon" />
+        {weatherIcons.map((weatherItem) =>
+          weatherItem.number === weatherData.currentDay.weatherIcon ? (
+            <img key={weatherItem.number} src={weatherItem.img} alt={weatherItem.weatherText} />
+          ) : (
+            ""
+          )
+        )}
         <TextContainer>
           <CardText>Today</CardText>
           <CardText>{weatherData.currentDay.location}</CardText>

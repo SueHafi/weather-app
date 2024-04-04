@@ -7,6 +7,7 @@ import searchIcon from "./../public/search.svg";
 import { locationData, currentConditionData, forecast } from "./recievedData";
 import "./App.css";
 import "./index.css";
+import { weatherIcons } from "./weatherIcons";
 
 const Form = styled.form`
   display: flex;
@@ -57,7 +58,7 @@ function weatherApi(locationText) {
 
 function App() {
   const [userInput, setUserInput] = useState("");
-  const [weatherData, setWeatherData] = useState({
+  const [weatherData, setWeatherData] = useState({ 
     currentDay: {
       location: locationData[0].EnglishName,
       currentTemp: currentConditionData[0].Temperature.Metric.Value,
@@ -72,34 +73,54 @@ function App() {
     },
     restOfWeek: [
       {
-        currentDay: "Monday",
-        weatherIcon: "yes",
-        highestTemp: 20,
-        lowestTemp: 3,
+        currentDay: forecast.DailyForecasts[0].Date,
+        weatherIcon: forecast.DailyForecasts[0].Day.Icon,
+        highestTemp: fahrenheitToCelsius(
+          forecast.DailyForecasts[0].Temperature.Maximum.Value
+        ),
+        lowestTemp: fahrenheitToCelsius(
+          forecast.DailyForecasts[0].Temperature.Minimum.Value
+        ),
       },
       {
-        currentDay: "Tuesday",
-        weatherIcon: "yes",
-        highestTemp: 20,
-        lowestTemp: 3,
+        currentDay: forecast.DailyForecasts[1].Date,
+        weatherIcon: forecast.DailyForecasts[1].Day.Icon,
+        highestTemp: fahrenheitToCelsius(
+          forecast.DailyForecasts[1].Temperature.Maximum.Value
+        ),
+        lowestTemp: fahrenheitToCelsius(
+          forecast.DailyForecasts[1].Temperature.Minimum.Value
+        ),
       },
       {
-        currentDay: "wednesday",
-        weatherIcon: "yes",
-        highestTemp: 20,
-        lowestTemp: 3,
+        currentDay: forecast.DailyForecasts[2].Date,
+        weatherIcon: forecast.DailyForecasts[2].Day.Icon,
+        highestTemp: fahrenheitToCelsius(
+          forecast.DailyForecasts[2].Temperature.Maximum.Value
+        ),
+        lowestTemp: fahrenheitToCelsius(
+          forecast.DailyForecasts[2].Temperature.Minimum.Value
+        ),
       },
       {
-        currentDay: "Thursday",
-        weatherIcon: "yes",
-        highestTemp: 20,
-        lowestTemp: 3,
+        currentDay: forecast.DailyForecasts[3].Date,
+        weatherIcon: forecast.DailyForecasts[3].Day.Icon,
+        highestTemp: fahrenheitToCelsius(
+          forecast.DailyForecasts[3].Temperature.Maximum.Value
+        ),
+        lowestTemp: fahrenheitToCelsius(
+          forecast.DailyForecasts[3].Temperature.Minimum.Value
+        ),
       },
       {
-        currentDay: "Friday",
-        weatherIcon: "yes",
-        highestTemp: 20,
-        lowestTemp: 3,
+        currentDay: forecast.DailyForecasts[4].Date,
+        weatherIcon: forecast.DailyForecasts[4].Day.Icon,
+        highestTemp: fahrenheitToCelsius(
+          forecast.DailyForecasts[4].Temperature.Maximum.Value
+        ),
+        lowestTemp: fahrenheitToCelsius(
+          forecast.DailyForecasts[4].Temperature.Minimum.Value
+        ),
       },
     ],
   });
@@ -131,7 +152,7 @@ function App() {
           </button>
         </Form>
         <DetailCard weatherData={weatherData} />
-        <OverviewCard />
+        <OverviewCard weatherData={weatherData} />
       </ContentContainer>
     </>
   );
