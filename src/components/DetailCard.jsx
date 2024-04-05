@@ -14,6 +14,7 @@ const CurrentDayCard = styled.div`
   border-radius: 1.5rem;
   box-shadow: 0rem 0rem 0.7rem;
   padding: 20px;
+  align-items: center;
 `;
 
 const TextContainer = styled.div`
@@ -24,26 +25,41 @@ const CardText = styled.p`
   font-size: 2.2rem;
 `;
 
-export default function DetailCard({ weatherData }) {
+const Img = styled.img`
+  height: 20rem;
+  width: 20rem;
+`;
+
+export default function DetailCard({
+  weatherData,
+  location,
+  currentTemp,
+  lowestTemp,
+  highestTemp,
+  currentWeatherCondition,
+}) {
   return (
     <CardContainer>
       <CurrentDayCard>
         {weatherIcons.map((weatherItem) =>
           weatherItem.number === weatherData.currentDay.weatherIcon ? (
-            <img key={weatherItem.number} src={weatherItem.img} alt={weatherItem.weatherText} />
+            <Img
+              key={weatherItem.number}
+              src={weatherItem.img}
+              alt={weatherItem.weatherText}
+            />
           ) : (
             ""
           )
         )}
         <TextContainer>
           <CardText>Today</CardText>
-          <CardText>{weatherData.currentDay.location}</CardText>
-          <CardText>{Math.round(weatherData.currentDay.currentTemp)}</CardText>
+          <CardText>{location}</CardText>
+          <CardText>{Math.round(currentTemp)}</CardText>
           <CardText>
-            Low: {Math.round(weatherData.currentDay.lowestTemp)} | High:
-            {Math.round(weatherData.currentDay.highestTemp)}
+            High: {Math.round(highestTemp)} | Low: {Math.round(lowestTemp)}
           </CardText>
-          <CardText>{weatherData.currentDay.currentWeatherCondition}</CardText>
+          <CardText>{currentWeatherCondition}</CardText>
         </TextContainer>
       </CurrentDayCard>
     </CardContainer>

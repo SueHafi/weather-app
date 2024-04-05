@@ -7,7 +7,6 @@ import searchIcon from "./../public/search.svg";
 import { locationData, currentConditionData, forecast } from "./recievedData";
 import "./App.css";
 import "./index.css";
-import { weatherIcons } from "./weatherIcons";
 
 const Form = styled.form`
   display: flex;
@@ -19,6 +18,12 @@ const ContentContainer = styled.div`
   width: 100%;
   margin-right: auto;
   margin-left: auto;
+`;
+
+const DayCardsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 function fahrenheitToCelsius(fahrenheit) {
@@ -58,7 +63,7 @@ function weatherApi(locationText) {
 
 function App() {
   const [userInput, setUserInput] = useState("");
-  const [weatherData, setWeatherData] = useState({ 
+  const [weatherData, setWeatherData] = useState({
     currentDay: {
       location: locationData[0].EnglishName,
       currentTemp: currentConditionData[0].Temperature.Metric.Value,
@@ -75,6 +80,7 @@ function App() {
       {
         currentDay: forecast.DailyForecasts[0].Date,
         weatherIcon: forecast.DailyForecasts[0].Day.Icon,
+        currentWeatherCondition: forecast.DailyForecasts[0].Day.IconPhrase,
         highestTemp: fahrenheitToCelsius(
           forecast.DailyForecasts[0].Temperature.Maximum.Value
         ),
@@ -85,6 +91,7 @@ function App() {
       {
         currentDay: forecast.DailyForecasts[1].Date,
         weatherIcon: forecast.DailyForecasts[1].Day.Icon,
+        currentWeatherCondition: forecast.DailyForecasts[1].Day.IconPhrase,
         highestTemp: fahrenheitToCelsius(
           forecast.DailyForecasts[1].Temperature.Maximum.Value
         ),
@@ -95,6 +102,7 @@ function App() {
       {
         currentDay: forecast.DailyForecasts[2].Date,
         weatherIcon: forecast.DailyForecasts[2].Day.Icon,
+        currentWeatherCondition: forecast.DailyForecasts[2].Day.IconPhrase,
         highestTemp: fahrenheitToCelsius(
           forecast.DailyForecasts[2].Temperature.Maximum.Value
         ),
@@ -105,6 +113,7 @@ function App() {
       {
         currentDay: forecast.DailyForecasts[3].Date,
         weatherIcon: forecast.DailyForecasts[3].Day.Icon,
+        currentWeatherCondition: forecast.DailyForecasts[3].Day.IconPhrase,
         highestTemp: fahrenheitToCelsius(
           forecast.DailyForecasts[3].Temperature.Maximum.Value
         ),
@@ -115,6 +124,7 @@ function App() {
       {
         currentDay: forecast.DailyForecasts[4].Date,
         weatherIcon: forecast.DailyForecasts[4].Day.Icon,
+        currentWeatherCondition: forecast.DailyForecasts[4].Day.IconPhrase,
         highestTemp: fahrenheitToCelsius(
           forecast.DailyForecasts[4].Temperature.Maximum.Value
         ),
@@ -136,6 +146,7 @@ function App() {
     event.preventDefault();
     locationApiCall();
   }
+
   return (
     <>
       <ContentContainer>
@@ -151,8 +162,28 @@ function App() {
             <img src={searchIcon} alt="search icon" />
           </button>
         </Form>
-        <DetailCard weatherData={weatherData} />
-        <OverviewCard weatherData={weatherData} />
+        <DetailCard
+          weatherData={weatherData}
+          location={weatherData.currentDay.location}
+          currentTemp={weatherData.currentDay.currentTemp}
+          lowestTemp={weatherData.currentDay.lowestTemp}
+          highestTemp={weatherData.currentDay.highestTemp}
+          currentWeatherCondition={
+            weatherData.currentDay.currentWeatherCondition
+          }
+        />
+        <DayCardsContainer>
+          {weatherData.restOfWeek.map((day) => (
+            <OverviewCard
+              key={day.currentDay}
+              lowestTemp={day.lowestTemp}
+              highestTemp={day.highestTemp}
+              weatherIcon={day.weatherIcon}
+              weatherIconDescription={day.currentWeatherCondition}
+              dayName={day.currentDay}
+            />
+          ))}
+        </DayCardsContainer>
       </ContentContainer>
     </>
   );
