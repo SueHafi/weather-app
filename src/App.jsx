@@ -14,6 +14,9 @@ const Form = styled.form`
   margin-bottom: 20px;
 `;
 
+const SearchBox = styled.input`
+font-size: 2rem;`
+
 const ContentContainer = styled.div`
   width: 100%;
   margin-right: auto;
@@ -24,6 +27,7 @@ const DayCardsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 2.5rem;
 `;
 
 function fahrenheitToCelsius(fahrenheit) {
@@ -152,7 +156,7 @@ function App() {
       <ContentContainer>
         <Header />
         <Form onSubmit={handleSubmit}>
-          <input
+          <SearchBox
             type="search"
             placeholder="London"
             value={userInput}

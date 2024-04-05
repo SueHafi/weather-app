@@ -3,17 +3,25 @@ import { format } from "date-fns";
 import { weatherIcons } from "../weatherIcons";
 
 const DayCard = styled.div`
-  width: 15rem;
-  outline: solid 0.1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  width: 24rem;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 1.5rem;
+  box-shadow: 0rem 0rem 0.4rem;
+`;
+
+const Text = styled.p`
+  font-size: 1.8rem;
+`;
+
+const DayName = styled.p`
+  font-size: 2rem;
+  font-weight: 500;
 `;
 
 const Img = styled.img`
-  height: 5rem;
-  width: 5rem;
+  height: 6rem;
+  width: 6rem;
 `;
 
 function getDayName(isoStringDate) {
@@ -30,7 +38,7 @@ export default function OverviewCard({
 }) {
   return (
     <DayCard>
-      <p>{getDayName(dayName)}</p>
+      <DayName>{getDayName(dayName)}</DayName>
       {weatherIcons.map((weatherItem) =>
         weatherItem.number === weatherIcon ? (
           <Img
@@ -42,8 +50,8 @@ export default function OverviewCard({
           ""
         )
       )}
-      <p>{`High: ${Math.round(highestTemp)}`}</p>
-      <p>{`Low: ${Math.round(lowestTemp)}`}</p>
+      <Text>{`High: ${Math.round(highestTemp)}`}</Text>
+      <Text>{`Low: ${Math.round(lowestTemp)}`}</Text>
     </DayCard>
   );
 }

@@ -21,13 +21,18 @@ const TextContainer = styled.div`
   padding: 10px;
 `;
 
+const DayText = styled.p`
+  font-size: 2.2rem;
+  font-weight: 500;
+`;
+
 const CardText = styled.p`
   font-size: 2.2rem;
 `;
 
 const Img = styled.img`
-  height: 20rem;
-  width: 20rem;
+  height: 22rem;
+  width: 22rem;
 `;
 
 export default function DetailCard({
@@ -53,7 +58,7 @@ export default function DetailCard({
           )
         )}
         <TextContainer>
-          <CardText>Today</CardText>
+          <DayText>Today</DayText>
           <CardText>{location}</CardText>
           <CardText>{Math.round(currentTemp)}</CardText>
           <CardText>
