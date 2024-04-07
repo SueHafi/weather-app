@@ -63,14 +63,14 @@ export default function DetailCard({
         )}
         <TextContainer>
           <DayText>Today</DayText>
-          <CardText>{location ? location : "--"}</CardText>
-          <CardText>{currentTemp ? Math.round(currentTemp) : "--"}</CardText>
+          <CardText>{location ? location : "Location: --"}</CardText>
+          <CardText>{currentTemp ? Math.round(currentTemp) : "Temperature: --"}</CardText>
           <CardText>
             High: {highestTemp ? Math.round(highestTemp) : "--"} | Low:{" "}
             {lowestTemp ? Math.round(lowestTemp) : "--"}
           </CardText>
           <CardText>
-            {currentWeatherCondition ? currentWeatherCondition : "--"}
+            {currentWeatherCondition ? currentWeatherCondition : "Weather Icon: --"}
           </CardText>
         </TextContainer>
       </CurrentDayCard>

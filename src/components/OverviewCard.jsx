@@ -54,7 +54,7 @@ export default function OverviewCard({
 
   return (
     <DayCard>
-      <DayName>{dayName ? getDayName(dayName) : "--"}</DayName>
+      <DayName>{dayName ? getDayName(dayName) : "Day: --"}</DayName>
       {weatherItem && (
         <Img
           key={weatherItem.number}
@@ -62,8 +62,8 @@ export default function OverviewCard({
           alt={weatherIconDescription}
         />
       )}
-      <Text>{highestTemp ? `High: ${Math.round(highestTemp)}` : "--"}</Text>
-      <Text>{lowestTemp ? `Low: ${Math.round(lowestTemp)}` : "--"}</Text>
+      <Text>{highestTemp ? `High: ${Math.round(highestTemp)}` : "High: --"}</Text>
+      <Text>{lowestTemp ? `Low: ${Math.round(lowestTemp)}` : "Low: --"}</Text>
     </DayCard>
   );
 }

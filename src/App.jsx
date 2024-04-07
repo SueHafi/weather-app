@@ -4,7 +4,7 @@ import DetailCard from "./components/DetailCard";
 import OverviewCard from "./components/OverviewCard";
 import Header from "./components/Header";
 import searchIcon from "./../public/search.svg";
-import cloudOverLay from "./../public/weatherBackgroundOverlay/cloudOverLay.png"
+import cloudOverLay from "./../public/weatherBackgroundOverlay/cloudOverLay.png";
 import { locationData, currentConditionData, forecast } from "./recievedData";
 import { startingWeatherData, updatedWeatherData } from "./initialWeatherData";
 import "./App.css";
@@ -15,13 +15,13 @@ const themes = {
     primary: "#bee4f7",
     text: "#0c0d0d",
     backgroundImg: `${cloudOverLay}`,
-    backgroundCardColor: 'rgba(255, 255, 255, 0.3)',
+    backgroundCardColor: "rgba(255, 255, 255, 0.3)",
   },
   dark: {
     primary: "#020745",
     text: "#ffffff",
     backgroundImg: "",
-    backgroundCardColor: 'rgba(255, 255, 255, 0.3)',
+    backgroundCardColor: "rgba(255, 255, 255, 0.3)",
   },
 };
 const ContentContainer = styled.div`
@@ -29,9 +29,9 @@ const ContentContainer = styled.div`
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  background-image: url(${(props)=>props.theme.backgroundImg});
-  background-color: ${(props)=> props.theme.primary};
-  color: ${(props)=> props.text};
+  background-image: url(${(props) => props.theme.backgroundImg});
+  background-color: ${(props) => props.theme.primary};
+  color: ${(props) => props.text};
 `;
 
 const DayCardsContainer = styled.div`
@@ -49,6 +49,12 @@ const Form = styled.form`
 
 const SearchBox = styled.input`
   font-size: 2rem;
+`;
+
+const Footer = styled.footer`
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: auto;
 `;
 
 function weatherApi(locationText) {
@@ -113,7 +119,7 @@ function App() {
   return (
     <>
       <ThemeProvider
-        theme={currentTheme === 'light' ? themes.light : themes.dark}
+        theme={currentTheme === "light" ? themes.light : themes.dark}
       >
         <ContentContainer>
           <Header changeTheme={handleOnClick} />
@@ -150,6 +156,11 @@ function App() {
               />
             ))}
           </DayCardsContainer>
+          <Footer>
+            <p>
+              &copy; 2023 Sue Hafizoglu | See code at <a href="#">GitHub</a>
+            </p>
+          </Footer>
         </ContentContainer>
       </ThemeProvider>
     </>
