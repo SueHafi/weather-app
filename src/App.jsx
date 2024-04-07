@@ -1,26 +1,37 @@
 import { useState, useEffect } from "react";
-import { styled } from "styled-components";
+import { styled, ThemeProvider } from "styled-components";
 import DetailCard from "./components/DetailCard";
 import OverviewCard from "./components/OverviewCard";
 import Header from "./components/Header";
 import searchIcon from "./../public/search.svg";
+import cloudOverLay from "./../public/weatherBackgroundOverlay/cloudOverLay.png"
 import { locationData, currentConditionData, forecast } from "./recievedData";
+import { startingWeatherData, updatedWeatherData } from "./initialWeatherData";
 import "./App.css";
 import "./index.css";
 
-const Form = styled.form`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-`;
-
-const SearchBox = styled.input`
-font-size: 2rem;`
-
+const themes = {
+  light: {
+    primary: "#bee4f7",
+    text: "#0c0d0d",
+    backgroundImg: `${cloudOverLay}`,
+    backgroundCardColor: 'rgba(255, 255, 255, 0.3)',
+  },
+  dark: {
+    primary: "#020745",
+    text: "#ffffff",
+    backgroundImg: "",
+    backgroundCardColor: 'rgba(255, 255, 255, 0.3)',
+  },
+};
 const ContentContainer = styled.div`
+  min-height: 100vh;
   width: 100%;
   margin-right: auto;
   margin-left: auto;
+  background-image: url(${(props)=>props.theme.backgroundImg});
+  background-color: ${(props)=> props.theme.primary};
+  color: ${(props)=> props.text};
 `;
 
 const DayCardsContainer = styled.div`
@@ -30,10 +41,15 @@ const DayCardsContainer = styled.div`
   gap: 2.5rem;
 `;
 
-function fahrenheitToCelsius(fahrenheit) {
-  const celsius = ((fahrenheit - 32) * 5) / 9;
-  return celsius;
-}
+const Form = styled.form`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+`;
+
+const SearchBox = styled.input`
+  font-size: 2rem;
+`;
 
 function weatherApi(locationText) {
   async function locationApiCall() {
@@ -67,80 +83,8 @@ function weatherApi(locationText) {
 
 function App() {
   const [userInput, setUserInput] = useState("");
-  const [weatherData, setWeatherData] = useState({
-    currentDay: {
-      location: locationData[0].EnglishName,
-      currentTemp: currentConditionData[0].Temperature.Metric.Value,
-      lowestTemp: fahrenheitToCelsius(
-        forecast.DailyForecasts[0].Temperature.Minimum.Value
-      ),
-      highestTemp: fahrenheitToCelsius(
-        forecast.DailyForecasts[0].Temperature.Maximum.Value
-      ),
-      currentWeatherCondition: currentConditionData[0].WeatherText,
-      weatherIcon: currentConditionData[0].WeatherIcon,
-    },
-    restOfWeek: [
-      {
-        currentDay: forecast.DailyForecasts[0].Date,
-        weatherIcon: forecast.DailyForecasts[0].Day.Icon,
-        currentWeatherCondition: forecast.DailyForecasts[0].Day.IconPhrase,
-        highestTemp: fahrenheitToCelsius(
-          forecast.DailyForecasts[0].Temperature.Maximum.Value
-        ),
-        lowestTemp: fahrenheitToCelsius(
-          forecast.DailyForecasts[0].Temperature.Minimum.Value
-        ),
-      },
-      {
-        currentDay: forecast.DailyForecasts[1].Date,
-        weatherIcon: forecast.DailyForecasts[1].Day.Icon,
-        currentWeatherCondition: forecast.DailyForecasts[1].Day.IconPhrase,
-        highestTemp: fahrenheitToCelsius(
-          forecast.DailyForecasts[1].Temperature.Maximum.Value
-        ),
-        lowestTemp: fahrenheitToCelsius(
-          forecast.DailyForecasts[1].Temperature.Minimum.Value
-        ),
-      },
-      {
-        currentDay: forecast.DailyForecasts[2].Date,
-        weatherIcon: forecast.DailyForecasts[2].Day.Icon,
-        currentWeatherCondition: forecast.DailyForecasts[2].Day.IconPhrase,
-        highestTemp: fahrenheitToCelsius(
-          forecast.DailyForecasts[2].Temperature.Maximum.Value
-        ),
-        lowestTemp: fahrenheitToCelsius(
-          forecast.DailyForecasts[2].Temperature.Minimum.Value
-        ),
-      },
-      {
-        currentDay: forecast.DailyForecasts[3].Date,
-        weatherIcon: forecast.DailyForecasts[3].Day.Icon,
-        currentWeatherCondition: forecast.DailyForecasts[3].Day.IconPhrase,
-        highestTemp: fahrenheitToCelsius(
-          forecast.DailyForecasts[3].Temperature.Maximum.Value
-        ),
-        lowestTemp: fahrenheitToCelsius(
-          forecast.DailyForecasts[3].Temperature.Minimum.Value
-        ),
-      },
-      {
-        currentDay: forecast.DailyForecasts[4].Date,
-        weatherIcon: forecast.DailyForecasts[4].Day.Icon,
-        currentWeatherCondition: forecast.DailyForecasts[4].Day.IconPhrase,
-        highestTemp: fahrenheitToCelsius(
-          forecast.DailyForecasts[4].Temperature.Maximum.Value
-        ),
-        lowestTemp: fahrenheitToCelsius(
-          forecast.DailyForecasts[4].Temperature.Minimum.Value
-        ),
-      },
-    ],
-  });
-  useEffect(() => {
-    weatherApi(weatherData.currentDay.location);
-  }, []);
+  const [weatherData, setWeatherData] = useState(startingWeatherData);
+  const [currentTheme, setCurrentTheme] = useState("light");
 
   function handleChange(event) {
     setUserInput(event.target.value);
@@ -148,47 +92,66 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    locationApiCall();
+    weatherApi(userInput);
+    // handle this line of code later
+    setWeatherData(updatedWeatherData);
+  }
+
+  // useEffect(() => {
+  //   const location = 'London';
+  //   weatherApi(location);
+  // }, []);
+
+  function handleOnClick(buttonClicked) {
+    if (buttonClicked === "light") {
+      setCurrentTheme("light");
+    } else {
+      setCurrentTheme("dark");
+    }
   }
 
   return (
     <>
-      <ContentContainer>
-        <Header />
-        <Form onSubmit={handleSubmit}>
-          <SearchBox
-            type="search"
-            placeholder="London"
-            value={userInput}
-            onChange={handleChange}
-          />
-          <button>
-            <img src={searchIcon} alt="search icon" />
-          </button>
-        </Form>
-        <DetailCard
-          weatherData={weatherData}
-          location={weatherData.currentDay.location}
-          currentTemp={weatherData.currentDay.currentTemp}
-          lowestTemp={weatherData.currentDay.lowestTemp}
-          highestTemp={weatherData.currentDay.highestTemp}
-          currentWeatherCondition={
-            weatherData.currentDay.currentWeatherCondition
-          }
-        />
-        <DayCardsContainer>
-          {weatherData.restOfWeek.map((day) => (
-            <OverviewCard
-              key={day.currentDay}
-              lowestTemp={day.lowestTemp}
-              highestTemp={day.highestTemp}
-              weatherIcon={day.weatherIcon}
-              weatherIconDescription={day.currentWeatherCondition}
-              dayName={day.currentDay}
+      <ThemeProvider
+        theme={currentTheme === 'light' ? themes.light : themes.dark}
+      >
+        <ContentContainer>
+          <Header changeTheme={handleOnClick} />
+          <Form onSubmit={handleSubmit}>
+            <SearchBox
+              type="search"
+              placeholder="London"
+              value={userInput}
+              onChange={handleChange}
             />
-          ))}
-        </DayCardsContainer>
-      </ContentContainer>
+            <button>
+              <img src={searchIcon} alt="search icon" />
+            </button>
+          </Form>
+          <DetailCard
+            weatherIconNum={weatherData.currentDay?.weatherIcon}
+            location={weatherData.currentDay?.location}
+            currentTemp={weatherData.currentDay?.currentTemp}
+            lowestTemp={weatherData.currentDay?.lowestTemp}
+            highestTemp={weatherData.currentDay?.highestTemp}
+            currentWeatherCondition={
+              weatherData.currentDay?.currentWeatherCondition
+            }
+          />
+          <DayCardsContainer>
+            {weatherData.restOfWeek.map((day, index) => (
+              <OverviewCard
+                key={index}
+                lowestTemp={day?.lowestTemp}
+                highestTemp={day?.highestTemp}
+                weatherIconNum={day?.weatherIcon}
+                weatherIconDescription={day?.currentWeatherCondition}
+                dayName={day?.currentDay}
+              />
+            ))}
+          </DayCardsContainer>
+        </ContentContainer>
+      </ThemeProvider>
     </>
   );
 }

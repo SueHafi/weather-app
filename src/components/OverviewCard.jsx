@@ -8,6 +8,16 @@ const DayCard = styled.div`
   text-align: center;
   border-radius: 1.5rem;
   box-shadow: 0rem 0rem 0.4rem;
+  transition: 0.2s;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: ${(props) => props.theme.text};
+
+  &:hover {
+    scale: 1.2;
+    background-color: rgba(255, 255, 255, 0.4);
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
 `;
 
 const Text = styled.p`
@@ -30,28 +40,30 @@ function getDayName(isoStringDate) {
 }
 
 export default function OverviewCard({
-  weatherIcon,
+  weatherIconNum,
   dayName,
   weatherIconDescription,
   lowestTemp,
   highestTemp,
 }) {
+  const weatherItem =
+    weatherIconNum &&
+    weatherIcons.find((element) => {
+      return element.number === weatherIconNum;
+    });
+
   return (
     <DayCard>
-      <DayName>{getDayName(dayName)}</DayName>
-      {weatherIcons.map((weatherItem) =>
-        weatherItem.number === weatherIcon ? (
-          <Img
-            key={weatherItem.number}
-            src={weatherItem.img}
-            alt={weatherIconDescription}
-          />
-        ) : (
-          ""
-        )
+      <DayName>{dayName ? getDayName(dayName) : "--"}</DayName>
+      {weatherItem && (
+        <Img
+          key={weatherItem.number}
+          src={weatherItem.img}
+          alt={weatherIconDescription}
+        />
       )}
-      <Text>{`High: ${Math.round(highestTemp)}`}</Text>
-      <Text>{`Low: ${Math.round(lowestTemp)}`}</Text>
+      <Text>{highestTemp ? `High: ${Math.round(highestTemp)}` : "--"}</Text>
+      <Text>{lowestTemp ? `Low: ${Math.round(lowestTemp)}` : "--"}</Text>
     </DayCard>
   );
 }

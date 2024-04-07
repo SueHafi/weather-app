@@ -4,7 +4,7 @@ import { weatherIcons } from "../weatherIcons";
 const CardContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 `;
 
 const CurrentDayCard = styled.div`
@@ -15,6 +15,8 @@ const CurrentDayCard = styled.div`
   box-shadow: 0rem 0rem 0.7rem;
   padding: 20px;
   align-items: center;
+  background-color: ${(props)=> props.theme.backgroundCardColor};
+  color: ${(props)=> props.theme.text};
 `;
 
 const TextContainer = styled.div`
@@ -36,35 +38,40 @@ const Img = styled.img`
 `;
 
 export default function DetailCard({
-  weatherData,
+  weatherIconNum,
   location,
   currentTemp,
   lowestTemp,
   highestTemp,
   currentWeatherCondition,
 }) {
+  const weatherItem =
+    weatherIconNum &&
+    weatherIcons.find((element) => {
+      return element.number === weatherIconNum;
+    });
+
   return (
     <CardContainer>
       <CurrentDayCard>
-        {weatherIcons.map((weatherItem) =>
-          weatherItem.number === weatherData.currentDay.weatherIcon ? (
-            <Img
-              key={weatherItem.number}
-              src={weatherItem.img}
-              alt={weatherItem.weatherText}
-            />
-          ) : (
-            ""
-          )
+        {weatherItem && (
+          <Img
+            key={weatherItem.number}
+            src={weatherItem.img}
+            alt={weatherItem.weatherText}
+          />
         )}
         <TextContainer>
           <DayText>Today</DayText>
-          <CardText>{location}</CardText>
-          <CardText>{Math.round(currentTemp)}</CardText>
+          <CardText>{location ? location : "--"}</CardText>
+          <CardText>{currentTemp ? Math.round(currentTemp) : "--"}</CardText>
           <CardText>
-            High: {Math.round(highestTemp)} | Low: {Math.round(lowestTemp)}
+            High: {highestTemp ? Math.round(highestTemp) : "--"} | Low:{" "}
+            {lowestTemp ? Math.round(lowestTemp) : "--"}
           </CardText>
-          <CardText>{currentWeatherCondition}</CardText>
+          <CardText>
+            {currentWeatherCondition ? currentWeatherCondition : "--"}
+          </CardText>
         </TextContainer>
       </CurrentDayCard>
     </CardContainer>
