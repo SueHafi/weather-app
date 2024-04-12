@@ -6,8 +6,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import searchIcon from "./../public/search.svg";
 import cloudOverLay from "./../public/weatherBackgroundOverlay/cloudOverLay.png";
-import { locationData, currentConditionData, forecastData } from "./recievedData";
-import { startingWeatherData, updatedWeatherData } from "./initialWeatherData";
+import { startingWeatherData, mapToState } from "./initialWeatherData";
+import { weatherApi } from "./weatherApi";
 import "./App.css";
 import "./index.css";
 
@@ -53,33 +53,6 @@ const SearchBox = styled.input`
   font-size: 2rem;
 `;
 
-function weatherApi(locationText) {
-  async function locationApiCall() {
-    // const userText = locationText;
-    // const response = await fetch(
-    //   `http://dataservice.accuweather.com/locations/v1/search?apikey=KAW7NgDznyiDtyKI0zRKDai7UNnTAha8&q=${locationText}`
-    // );
-    // const locationData = await response.json();
-    const data = locationData;
-    const locationKey = locationData[0].Key;
-    currentConditionApiCall();
-    forecast();
-    async function currentConditionApiCall() {
-      // const response = await fetch(
-      //   `http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=KAW7NgDznyiDtyKI0zRKDai7UNnTAha8`
-      // );
-      // const currentConditionData = await response.json();
-      const data = currentConditionData;
-    }
-
-    async function forecast() {
-      // const response = await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=KAW7NgDznyiDtyKI0zRKDai7UNnTAha8`);
-      // const forecastData = await response.json();
-      const data = forecastData;
-    }
-  }
-}
-
 function App() {
   const [userInput, setUserInput] = useState("");
   const [weatherData, setWeatherData] = useState(startingWeatherData);
@@ -89,17 +62,22 @@ function App() {
     setUserInput(event.target.value);
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    weatherApi(userInput);
-    // handle this line of code later
+    const recievedWeatherData = await weatherApi(userInput);
+    const updatedWeatherData = mapToState(recievedWeatherData);
     setWeatherData(updatedWeatherData);
   }
 
-  // useEffect(() => {
-  //   const location = 'London';
-  //   weatherApi(location);
-  // }, []);
+  useEffect(() => {
+    async function apiCallWithLondon() {
+      const location = "London";
+      const recievedWeatherData = await weatherApi(location);
+      const updatedWeatherData = mapToState(recievedWeatherData);
+      setWeatherData(updatedWeatherData);
+    }
+    apiCallWithLondon();
+  }, []);
 
   function handleOnClick(buttonClicked) {
     if (buttonClicked === "light") {
