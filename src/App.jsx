@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import searchIcon from "./../public/search.svg";
 import cloudOverLay from "./../public/weatherBackgroundOverlay/cloudOverLay.png";
-import { locationData, currentConditionData, forecast } from "./recievedData";
+import { locationData, currentConditionData, forecastData } from "./recievedData";
 import { startingWeatherData, updatedWeatherData } from "./initialWeatherData";
 import "./App.css";
 import "./index.css";
@@ -55,30 +55,27 @@ const SearchBox = styled.input`
 
 function weatherApi(locationText) {
   async function locationApiCall() {
-    // const userText = "mk10 9fr";
+    // const userText = locationText;
     // const response = await fetch(
     //   `http://dataservice.accuweather.com/locations/v1/search?apikey=KAW7NgDznyiDtyKI0zRKDai7UNnTAha8&q=${locationText}`
     // );
-    // const data = await response.json();
+    // const locationData = await response.json();
     const data = locationData;
     const locationKey = locationData[0].Key;
-    // console.log(data);
     currentConditionApiCall();
     forecast();
     async function currentConditionApiCall() {
-      // const locationKey = "49299_PC";
       // const response = await fetch(
       //   `http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=KAW7NgDznyiDtyKI0zRKDai7UNnTAha8`
       // );
-      // const data = await response.json();
+      // const currentConditionData = await response.json();
       const data = currentConditionData;
     }
 
     async function forecast() {
-      // const locationKey = "49299_PC";
       // const response = await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=KAW7NgDznyiDtyKI0zRKDai7UNnTAha8`);
-      // const data = await response.json();
-      const data = forecast;
+      // const forecastData = await response.json();
+      const data = forecastData;
     }
   }
 }
@@ -152,7 +149,7 @@ function App() {
               />
             ))}
           </DayCardsContainer>
-          <Footer/>
+          <Footer />
         </ContentContainer>
       </ThemeProvider>
     </>

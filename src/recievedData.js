@@ -107,7 +107,7 @@ export const currentConditionData = [
     }
 ];
 
-export const forecast = {
+export const forecastData = {
     "Headline": {
         "EffectiveDate": "2024-04-04T02:00:00+01:00",
         "EffectiveEpochDate": 1712192400,

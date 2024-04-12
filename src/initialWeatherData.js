@@ -1,4 +1,4 @@
-import { locationData, currentConditionData, forecast } from "./recievedData";
+import { locationData, currentConditionData, forecastData } from "./recievedData";
 
 function fahrenheitToCelsius(fahrenheit) {
   const celsius = ((fahrenheit - 32) * 5) / 9;
@@ -15,15 +15,15 @@ export const updatedWeatherData = {
     location: locationData[0].EnglishName,
     currentTemp: currentConditionData[0].Temperature.Metric.Value,
     lowestTemp: fahrenheitToCelsius(
-      forecast.DailyForecasts[0].Temperature.Minimum.Value
+      forecastData.DailyForecasts[0].Temperature.Minimum.Value
     ),
     highestTemp: fahrenheitToCelsius(
-      forecast.DailyForecasts[0].Temperature.Maximum.Value
+      forecastData.DailyForecasts[0].Temperature.Maximum.Value
     ),
     currentWeatherCondition: currentConditionData[0].WeatherText,
     weatherIcon: currentConditionData[0].WeatherIcon,
   },
-  restOfWeek: forecast.DailyForecasts.map((item) => {
+  restOfWeek: forecastData.DailyForecasts.map((item) => {
     return {
       currentDay: item.Date,
       weatherIcon: item.Day.Icon,
