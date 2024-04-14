@@ -9,32 +9,52 @@ const CardContainer = styled.div`
 
 const CurrentDayCard = styled.div`
   display: flex;
-  gap: 3rem;
+  gap: 0;
   outline: solid 0.1rem;
   border-radius: 1.5rem;
   box-shadow: 0rem 0rem 0.7rem;
-  padding: 20px;
+  padding: 4px;
   align-items: center;
-  background-color: ${(props)=> props.theme.backgroundCardColor};
-  color: ${(props)=> props.theme.text};
+  background-color: ${(props) => props.theme.backgroundCardColor};
+  color: ${(props) => props.theme.text};
+
+  @media (min-width: 768px) {
+    padding: 20px;
+    gap: 3rem;
+  }
 `;
 
 const TextContainer = styled.div`
-  padding: 10px;
+  @media (min-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const DayText = styled.p`
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 500;
+
+  @media (min-width: 768px) {
+    font-size: 2.2rem;
+  }
 `;
 
 const CardText = styled.p`
-  font-size: 2.2rem;
+  font-size: 1.6rem;
+
+  @media (min-width: 768px) {
+    font-size: 2.2rem;
+  }
 `;
 
 const Img = styled.img`
-  height: 22rem;
-  width: 22rem;
+  height: 13rem;
+  width: 13rem;
+
+  @media (min-width: 768px) {
+    height: 22rem;
+    width: 22rem;
+  }
 `;
 
 export default function DetailCard({
@@ -64,13 +84,17 @@ export default function DetailCard({
         <TextContainer>
           <DayText>Today</DayText>
           <CardText>{location ? location : "Location: --"}</CardText>
-          <CardText>{currentTemp ? Math.round(currentTemp) : "Temperature: --"}&deg;C</CardText>
+          <CardText>
+            {currentTemp ? Math.round(currentTemp) : "Temperature: --"}&deg;C
+          </CardText>
           <CardText>
             High: {highestTemp ? Math.round(highestTemp) : "--"}&deg;C | Low:{" "}
             {lowestTemp ? Math.round(lowestTemp) : "--"}&deg;C
           </CardText>
           <CardText>
-            {currentWeatherCondition ? currentWeatherCondition : "Weather Icon: --"}
+            {currentWeatherCondition
+              ? currentWeatherCondition
+              : "Weather Icon: --"}
           </CardText>
         </TextContainer>
       </CurrentDayCard>

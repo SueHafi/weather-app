@@ -18,18 +18,23 @@ const DayCard = styled.div`
     margin-left: 2rem;
     margin-right: 2rem;
   }
-
-  @media (min-width: 768px) {
-  }
 `;
 
 const Text = styled.p`
-  font-size: 1.8rem;
+font-size: 1.5rem;
+
+@media (min-width: 768px) {
+font-size: 2.2rem;
+}
 `;
 
 const DayName = styled.p`
-  font-size: 2rem;
   font-weight: 500;
+  font-size: 1.8rem;
+
+@media (min-width: 768px) {
+font-size: 2rem;
+}
 `;
 
 const Img = styled.img`

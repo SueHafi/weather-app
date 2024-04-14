@@ -1,5 +1,4 @@
 // test data for api testing offline
-
 export const locationData = [
   {
     Version: 1,

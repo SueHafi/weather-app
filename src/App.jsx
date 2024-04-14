@@ -9,6 +9,7 @@ import cloudOverLay from "./../public/weatherBackgroundOverlay/cloudOverLay.png"
 import { startingWeatherData, mapToState } from "./initialWeatherData";
 import { weatherApi } from "./weatherApi";
 import GlobalStyle from "./global";
+import {currentConditionData,locationData,forecastData} from './testData';
 
 const themes = {
   light: {
@@ -40,8 +41,16 @@ const ContentContainer = styled.div`
 const DayCardsContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
+  flex-direction: column;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  padding: 10px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2.5rem;
+  }
 `;
 
 const Form = styled.form`
@@ -52,10 +61,14 @@ const Form = styled.form`
 `;
 
 const Label = styled.label`
-  font-size: 2rem;
+  font-size: 1.7rem;
   text-align: center;
   color: ${(props) => props.theme.text};
   margin-bottom: 20px;
+
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -65,8 +78,12 @@ const SearchContainer = styled.div`
 `;
 
 const SearchBox = styled.input`
-  font-size: 2rem;
+  font-size: 1.5rem;
   padding-left: 0.5rem;
+
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 function App() {
@@ -80,7 +97,11 @@ function App() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const recievedWeatherData = await weatherApi(userInput);
+    // const recievedWeatherData = await weatherApi(userInput);
+    // const updatedWeatherData = mapToState(recievedWeatherData);
+    // setWeatherData(updatedWeatherData);
+    const testData = {currentConditionData,locationData,forecastData};
+    const recievedWeatherData = testData;
     const updatedWeatherData = mapToState(recievedWeatherData);
     setWeatherData(updatedWeatherData);
   }

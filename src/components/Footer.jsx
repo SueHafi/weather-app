@@ -2,10 +2,13 @@ import { styled } from "styled-components";
 
 const StyledFooter = styled.footer`
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   margin-top: auto;
   color: ${(props) => props.theme.text};
-`;
+
+  @media (min-width: 768px) {
+    font-size: 1.8rem;
+  }`;
 
 const StyledLink = styled.a`
   color: blue;
