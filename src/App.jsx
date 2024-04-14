@@ -8,8 +8,7 @@ import searchIcon from "./../public/search.svg";
 import cloudOverLay from "./../public/weatherBackgroundOverlay/cloudOverLay.png";
 import { startingWeatherData, mapToState } from "./initialWeatherData";
 import { weatherApi } from "./weatherApi";
-import "./App.css";
-import "./index.css";
+import GlobalStyle from "./global";
 
 const themes = {
   light: {
@@ -92,6 +91,7 @@ function App() {
       <ThemeProvider
         theme={currentTheme === "light" ? themes.light : themes.dark}
       >
+        <GlobalStyle />
         <ContentContainer>
           <Header changeTheme={handleOnClick} />
           <Form onSubmit={handleSubmit}>
