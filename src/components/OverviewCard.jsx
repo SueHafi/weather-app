@@ -18,6 +18,9 @@ const DayCard = styled.div`
     margin-left: 2rem;
     margin-right: 2rem;
   }
+
+  @media (min-width: 768px) {
+  }
 `;
 
 const Text = styled.p`
@@ -62,8 +65,12 @@ export default function OverviewCard({
           alt={weatherIconDescription}
         />
       )}
-      <Text>{highestTemp ? `High: ${Math.round(highestTemp)}` : "High: --"}&deg;C</Text>
-      <Text>{lowestTemp ? `Low: ${Math.round(lowestTemp)}` : "Low: --"}&deg;C</Text>
+      <Text>
+        {highestTemp ? `High: ${Math.round(highestTemp)}` : "High: --"}&deg;C
+      </Text>
+      <Text>
+        {lowestTemp ? `Low: ${Math.round(lowestTemp)}` : "Low: --"}&deg;C
+      </Text>
     </DayCard>
   );
 }
