@@ -1,18 +1,27 @@
 import { apiKey } from "./config";
+import { currentConditionData, locationData, forecastData } from "./testData";
 
 export async function weatherApi(locationText) {
-  return null;
-  const locationData = await locationApiCall(locationText);
-  const locationKey = locationData[0].Key;
-  const currentConditionData = await currentConditionApiCall(locationKey);
-  const forecastData = await forecast(locationKey);
+  try {
+    const locationData = await locationApiCall(locationText);
+    const locationKey = locationData[0].Key;
+    const currentConditionData = await currentConditionApiCall(locationKey);
+    const forecastData = await forecast(locationKey);
+    const data = {
+      locationData,
+      currentConditionData,
+      forecastData,
+    };
 
-  const data = {
-    locationData,
-    currentConditionData,
-    forecastData,
-  };
-  return data;
+    return data;
+  } catch (error) {
+    const data = {
+      locationData,
+      currentConditionData,
+      forecastData,
+    };
+    return data;
+  }
 }
 
 async function locationApiCall(locationText) {

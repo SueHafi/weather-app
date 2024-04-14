@@ -9,7 +9,6 @@ import cloudOverLay from "./../public/weatherBackgroundOverlay/cloudOverLay.png"
 import { startingWeatherData, mapToState } from "./initialWeatherData";
 import { weatherApi } from "./weatherApi";
 import GlobalStyle from "./global";
-import {currentConditionData,locationData,forecastData} from './testData';
 
 const themes = {
   light: {
@@ -97,11 +96,7 @@ function App() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    // const recievedWeatherData = await weatherApi(userInput);
-    // const updatedWeatherData = mapToState(recievedWeatherData);
-    // setWeatherData(updatedWeatherData);
-    const testData = {currentConditionData,locationData,forecastData};
-    const recievedWeatherData = testData;
+    const recievedWeatherData = await weatherApi(userInput);
     const updatedWeatherData = mapToState(recievedWeatherData);
     setWeatherData(updatedWeatherData);
   }
