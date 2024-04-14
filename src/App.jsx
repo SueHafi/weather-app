@@ -47,11 +47,26 @@ const DayCardsContainer = styled.div`
 const Form = styled.form`
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+`;
+
+const Label = styled.label`
+  font-size: 2rem;
+  text-align: center;
+  color: ${(props) => props.theme.text};
+  margin-bottom: 20px;
+`;
+
+const SearchContainer = styled.div`
+  display: flex;
+  justify-content: center;
   margin-bottom: 20px;
 `;
 
 const SearchBox = styled.input`
   font-size: 2rem;
+  padding-left: 0.5rem;
 `;
 
 function App() {
@@ -97,15 +112,21 @@ function App() {
         <ContentContainer>
           <Header changeTheme={handleOnClick} />
           <Form onSubmit={handleSubmit}>
-            <SearchBox
-              type="search"
-              placeholder="London"
-              value={userInput}
-              onChange={handleChange}
-            />
-            <button>
-              <img src={searchIcon} alt="search icon" />
-            </button>
+            <Label htmlFor="search-box">
+              Please search a country, city or postcode.
+            </Label>
+            <SearchContainer>
+              <SearchBox
+                id="search-box"
+                type="search"
+                placeholder="London"
+                value={userInput}
+                onChange={handleChange}
+              />
+              <button>
+                <img src={searchIcon} alt="search icon" />
+              </button>
+            </SearchContainer>
           </Form>
           <DetailCard
             weatherIconNum={weatherData.currentDay?.weatherIcon}

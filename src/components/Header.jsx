@@ -6,7 +6,7 @@ const HeaderContainer = styled.header`
 
 const Title = styled.h1`
   text-align: center;
-  font-size: 4rem;
+  font-size: 5rem;
   margin-top: 0;
   margin-bottom: 2rem;
   position: relative;
