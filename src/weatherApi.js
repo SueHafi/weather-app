@@ -1,6 +1,7 @@
 import { apiKey } from "./config";
 
 export async function weatherApi(locationText) {
+  return null;
   const locationData = await locationApiCall(locationText);
   const locationKey = locationData[0].Key;
   const currentConditionData = await currentConditionApiCall(locationKey);
