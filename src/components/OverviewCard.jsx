@@ -62,8 +62,8 @@ export default function OverviewCard({
           alt={weatherIconDescription}
         />
       )}
-      <Text>{highestTemp ? `High: ${Math.round(highestTemp)}` : "High: --"}</Text>
-      <Text>{lowestTemp ? `Low: ${Math.round(lowestTemp)}` : "Low: --"}</Text>
+      <Text>{highestTemp ? `High: ${Math.round(highestTemp)}` : "High: --"}&deg;C</Text>
+      <Text>{lowestTemp ? `Low: ${Math.round(lowestTemp)}` : "Low: --"}&deg;C</Text>
     </DayCard>
   );
 }
