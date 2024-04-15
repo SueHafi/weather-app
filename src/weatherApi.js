@@ -11,6 +11,7 @@ export async function weatherApi(locationText) {
       locationData,
       currentConditionData,
       forecastData,
+      isMockData: false,
     };
 
     return data;
@@ -19,6 +20,7 @@ export async function weatherApi(locationText) {
       locationData,
       currentConditionData,
       forecastData,
+      isMockData: true,
     };
     return data;
   }
