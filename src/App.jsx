@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import searchIcon from "./../public/search.svg";
 import cloudOverLay from "./../public/weatherBackgroundOverlay/cloudOverLay.png";
-import { startingWeatherData, mapToState } from "./initialWeatherData";
+import { startingWeatherData, mapToState } from "./weatherModel";
 import { weatherApi } from "./weatherApi";
 import GlobalStyle from "./global";
 
