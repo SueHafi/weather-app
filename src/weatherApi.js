@@ -1,5 +1,9 @@
 import { apiKey } from "./config";
-import { currentConditionData, locationData, forecastData } from "./testData";
+import {
+  currentConditionData,
+  locationData,
+  forecastData,
+} from "./fallbackData";
 
 export async function weatherApi(locationText) {
   try {

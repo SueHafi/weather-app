@@ -1,4 +1,4 @@
-// test data for api testing offline
+// fallback data for api being offline
 export const locationData = [
   {
     Version: 1,
