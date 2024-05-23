@@ -1,5 +1,7 @@
 // fallback data for api being offline
-export const locationData = [
+import { LocationData, CurrentConditionData, ForecastData } from './weatherApiTypes';
+
+export const locationData: LocationData = [
   {
     Version: 1,
     Key: "49299_PC",
@@ -81,7 +83,7 @@ export const locationData = [
   },
 ];
 
-export const currentConditionData = [
+export const currentConditionData: CurrentConditionData = [
   {
     LocalObservationDateTime: "2024-04-03T17:06:00+01:00",
     EpochTime: 1712160360,
@@ -108,7 +110,7 @@ export const currentConditionData = [
   },
 ];
 
-export const forecastData = {
+export const forecastData: ForecastData = {
   Headline: {
     EffectiveDate: "2024-04-04T02:00:00+01:00",
     EffectiveEpochDate: 1712192400,

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { styled, ThemeProvider } from "styled-components";
 import DetailCard from "./components/DetailCard";
 import OverviewCard from "./components/OverviewCard";
@@ -6,8 +6,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import searchIcon from "./../public/search.svg";
 import cloudOverLay from "./../public/weatherBackgroundOverlay/cloudOverLay.png";
-import { startingWeatherData, mapToState } from "./weatherModel/weatherModel";
-import { weatherApi } from "./weatherApi";
+import { startingWeatherData, mapToState, WeatherData } from "./weatherModel/weatherModel";
+import { weatherApi } from "./api/weatherApi";
 import GlobalStyle from "./global";
 
 const themes = {
@@ -34,7 +34,7 @@ const ContentContainer = styled.div`
   margin-left: auto;
   background-image: url(${(props) => props.theme.backgroundImg});
   background-color: ${(props) => props.theme.primary};
-  color: ${(props) => props.text};
+  color: ${(props) => props.theme.text};
 `;
 
 const DayCardsContainer = styled.div`
@@ -87,14 +87,16 @@ const SearchBox = styled.input`
 
 function App() {
   const [userInput, setUserInput] = useState("");
-  const [weatherData, setWeatherData] = useState(startingWeatherData);
+  const [weatherData, setWeatherData] = useState <WeatherData>(startingWeatherData);
   const [currentTheme, setCurrentTheme] = useState("light");
 
-  function handleChange(event) {
+  function handleChange(event: ChangeEvent<HTMLInputElement>): void {
     setUserInput(event.target.value);
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(
+    event: FormEvent<HTMLFormElement>
+  ): Promise<void> {
     event.preventDefault();
     const recievedWeatherData = await weatherApi(userInput);
     const updatedWeatherData = mapToState(recievedWeatherData);
@@ -111,7 +113,7 @@ function App() {
     apiCallWithLondon();
   }, []);
 
-  function handleOnClick(buttonClicked) {
+  function handleOnClick(buttonClicked: string): void {
     if (buttonClicked === "light") {
       setCurrentTheme("light");
     } else {
@@ -126,7 +128,7 @@ function App() {
       >
         <GlobalStyle />
         <ContentContainer>
-          <Header changeTheme={handleOnClick} />
+          <Header onChangeTheme={handleOnClick} />
           <Form onSubmit={handleSubmit}>
             <Label htmlFor="search-box">
               Please search a country, city or postcode.

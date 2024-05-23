@@ -57,6 +57,14 @@ const Img = styled.img`
   }
 `;
 
+type DetailCardProps = {
+  weatherIconNum: number | undefined;
+  location: string | undefined;
+  currentTemp: number | undefined;
+  lowestTemp: number | undefined;
+  highestTemp: number | undefined;
+  currentWeatherCondition: string | undefined;
+};
 export default function DetailCard({
   weatherIconNum,
   location,
@@ -64,7 +72,7 @@ export default function DetailCard({
   lowestTemp,
   highestTemp,
   currentWeatherCondition,
-}) {
+}: DetailCardProps) {
   const weatherItem =
     weatherIconNum &&
     weatherIcons.find((element) => {

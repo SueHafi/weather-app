@@ -53,13 +53,17 @@ const DarkButton = styled(Button)`
   color: white;
 `;
 
-export default function Header({ changeTheme }) {
+type HeaderProps = {
+  onChangeTheme: (x:string)=> void;
+}
+
+export default function Header({ onChangeTheme }: HeaderProps) {
   return (
     <HeaderContainer>
       <Title>React Weather Report</Title>
       <ButtonsContainer>
-        <LightButton onClick={() => changeTheme("light")}>Light</LightButton>
-        <DarkButton onClick={() => changeTheme("dark")}>Dark</DarkButton>
+        <LightButton onClick={() => onChangeTheme("light")}>Light</LightButton>
+        <DarkButton onClick={() => onChangeTheme("dark")}>Dark</DarkButton>
       </ButtonsContainer>
     </HeaderContainer>
   );

@@ -1,11 +1,23 @@
-import { apiKey } from "./config";
+import { apiKey } from "../config";
 import {
   currentConditionData,
   locationData,
   forecastData,
 } from "./fallbackData";
+import {
+  CurrentConditionData,
+  ForecastData,
+  LocationData,
+} from "./weatherApiTypes";
 
-export async function weatherApi(locationText) {
+export type WeatherApiData = {
+  locationData: LocationData;
+  currentConditionData: CurrentConditionData;
+  forecastData: ForecastData;
+  isMockData: boolean;
+};
+
+export async function weatherApi(locationText: string): Promise<WeatherApiData> {
   try {
     const locationData = await locationApiCall(locationText);
     const locationKey = locationData[0].Key;
@@ -30,21 +42,23 @@ export async function weatherApi(locationText) {
   }
 }
 
-async function locationApiCall(locationText) {
+async function locationApiCall(locationText: string): Promise<LocationData> {
   const response = await fetch(
     `https://dataservice.accuweather.com/locations/v1/search?apikey=${apiKey}&q=${locationText}`
   );
   return await response.json();
 }
 
-async function currentConditionApiCall(locationKey) {
+async function currentConditionApiCall(
+  locationKey: string
+): Promise<CurrentConditionData> {
   const response = await fetch(
     `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${apiKey}`
   );
   return await response.json();
 }
 
-async function forecast(locationKey) {
+async function forecast(locationKey: string): Promise<ForecastData> {
   const response = await fetch(
     `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}`
   );
