@@ -1,0 +1,65 @@
+[
+  {
+    "Version": 1,
+    "Key": "49299_PC",
+    "Type": "PostalCode",
+    "Rank": 52,
+    "LocalizedName": "Leeds",
+    "EnglishName": "Leeds",
+    "PrimaryPostalCode": "LS10",
+    "Region": {
+      "ID": "EUR",
+      "LocalizedName": "Europe",
+      "EnglishName": "Europe"
+    },
+    "Country": {
+      "ID": "GB",
+      "LocalizedName": "United Kingdom",
+      "EnglishName": "United Kingdom"
+    },
+    "AdministrativeArea": {
+      "ID": "MIK",
+      "LocalizedName": "Milton Keynes",
+      "EnglishName": "Milton Keynes",
+      "Level": 1,
+      "LocalizedType": "Unitary Authority",
+      "EnglishType": "Unitary Authority",
+      "CountryID": "GB"
+    },
+    "TimeZone": {
+      "Code": "BST",
+      "Name": "Europe/London",
+      "GmtOffset": 1,
+      "IsDaylightSaving": true,
+      "NextOffsetChange": "2024-10-27T01:00:00Z"
+    },
+    "GeoPosition": {
+      "Latitude": 52.041,
+      "Longitude": -0.705,
+      "Elevation": {
+        "Metric": { "Value": 69, "Unit": "m", "UnitType": 5 },
+        "Imperial": { "Value": 226, "Unit": "ft", "UnitType": 0 }
+      }
+    },
+    "IsAlias": false,
+    "ParentCity": {
+      "Key": "324866",
+      "LocalizedName": "Milton Keynes",
+      "EnglishName": "Milton Keynes"
+    },
+    "SupplementalAdminAreas": [
+      { "Level": 0, "LocalizedName": "England", "EnglishName": "England" },
+      { "Level": 3, "LocalizedName": "Middleton", "EnglishName": "Middleton" }
+    ],
+    "DataSets": [
+      "AirQualityCurrentConditions",
+      "AirQualityForecasts",
+      "Alerts",
+      "DailyPollenForecast",
+      "ForecastConfidence",
+      "FutureRadar",
+      "MinuteCast",
+      "Radar"
+    ]
+  }
+]

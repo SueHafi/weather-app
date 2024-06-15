@@ -1,0 +1,17 @@
+[
+  {
+    "LocalObservationDateTime": "2024-04-03T17:06:00+01:00",
+    "EpochTime": 1712160360,
+    "WeatherText": "Mostly cloudy",
+    "WeatherIcon": 6,
+    "HasPrecipitation": false,
+    "PrecipitationType": null,
+    "IsDayTime": true,
+    "Temperature": {
+      "Metric": { "Value": 11.8, "Unit": "C", "UnitType": 17 },
+      "Imperial": { "Value": 53, "Unit": "F", "UnitType": 18 }
+    },
+    "MobileLink": "http://www.accuweather.com/en/gb/milton-keynes/mk9-2/current-weather/49299_pc?lang=en-us",
+    "Link": "http://www.accuweather.com/en/gb/milton-keynes/mk9-2/current-weather/49299_pc?lang=en-us"
+  }
+]
