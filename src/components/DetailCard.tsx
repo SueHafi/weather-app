@@ -5,6 +5,8 @@ const CardContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
+  margin-right: 10px;
+  margin-left: 10px;
 `;
 
 const CurrentDayCard = styled.div`
@@ -13,7 +15,7 @@ const CurrentDayCard = styled.div`
   outline: solid 0.1rem;
   border-radius: 1.5rem;
   box-shadow: 0rem 0rem 0.7rem;
-  padding: 4px;
+  padding: 8px;
   align-items: center;
   background-color: ${(props) => props.theme.backgroundCardColor};
   color: ${(props) => props.theme.text};
@@ -90,7 +92,7 @@ export default function DetailCard({
           />
         )}
         <TextContainer>
-          <DayText>Today</DayText>
+          <DayText>Current Weather Condition:</DayText>
           <CardText>{location ? location : "Location: --"}</CardText>
           <CardText>
             {currentTemp ? Math.round(currentTemp) : "Temperature: --"}&deg;C
